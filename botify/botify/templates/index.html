@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{% block content %}
+<h1>Botify Home</h1>
+
+  <p>Welcome to <em>Botify</em>, I'm the greatest!!</p>
+
+<h2>Dynamic content</h2>
+
+
+  <ul>
+    <li><strong>Sessions:</strong> {{ num_sessions }}</li>
+    <li><strong>Events:</strong> {{ num_events }}</li>
+
+  </ul>
+
+{% endblock %}

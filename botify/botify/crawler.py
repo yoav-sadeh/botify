@@ -16,14 +16,7 @@ class Crawler(object):
             r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})'  # ...or ip
             r'(?::\d+)?'  # optional port
             r'(?:/?|[/?]\S+)$', re.IGNORECASE)
-        import os
-        #os.environ.setdefault('webdriver.chrome.driver','/home/yoav/.virtualenvs/botify/lib/chromedriver')
-        #options = Options()
-        # options.add_argument("start-maximized")
-        # options.add_argument("disable-infobars")
-        # options.add_argument("--ignore-certificate-errors")
-        # options.add_argument("--disable-extensions")
-        # options.add_argument("--test-type")
+
         self.driver = Chrome()
         try:
             assert regex.match(url) is not None
