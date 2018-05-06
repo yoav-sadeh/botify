@@ -8,5 +8,5 @@ class Session(models.Model):
 
 class SessionEvent(models.Model):
 
-    session_id = models.ForeignKey(Session, on_delete=models.CASCADE)
     name = models.CharField(max_length=10)
+    session = models.ForeignKey(Session, on_delete=models.CASCADE)

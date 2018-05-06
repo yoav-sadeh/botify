@@ -1,6 +1,8 @@
 from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render
+from django.views.generic import ListView
 
+from botify.crawler import Crawler
 from .models import Session, SessionEvent
 
 
@@ -19,3 +21,10 @@ def index(request):
         'index.html',
         context={'num_sessions': num_sessions, 'num_events': num_events},
     )
+
+
+def start_session_view(request):
+
+    crawler = Crawler()
+    crawler.inject()
+    return index(request)
