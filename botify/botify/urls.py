@@ -14,19 +14,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from botify import views
-from botify.api.views import SessionEventView
+from botify.api.views import SessionEventView, DOMElementEventViewSet, SessionViewSet
 
 router = DefaultRouter()
-router.register(r'session_events', SessionEventView, base_name='user')
+#router.register(r'session_events', SessionEventView.as_view, base_name='user')
+router.register(r'dom_element_event', DOMElementEventViewSet)
+router.register(r'session', SessionViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('start_session/', views.start_session_view, name='start-session-view'),
     path('session_events/', SessionEventView.as_view, name='session-events'),
+    path('', include(router.urls), name='dom'),
 ]
 
-#urlpatterns += router.urls

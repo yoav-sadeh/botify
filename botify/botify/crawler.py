@@ -1,3 +1,4 @@
+import os
 import re
 from typing import Any
 from logging import getLogger
@@ -34,51 +35,9 @@ class Crawler(object):
         assert regex.match(url) is not None
 
     def inject(self):
-        # self.driver.execute_script(
-        #     "Array.prototype.slice.call(document.getElementsByTagName('*')).forEach(a=> {a.addEventListener('click', function(event){ if (a == document.activeElement){alert(a.tagName);}})})")
-        self.driver.execute_script("""function getAllElements(){
-  return Array.prototype.slice.call(document.getElementsByTagName('*'));
-}
-window.events = [];
-function registerListener(listenerName, node){
-  node.addEventListener(listenerName, function(event){ events.push({'at': new Date(), 'node':node, 'event':event, 
-  'isActive': document.activeElement == node});});
-}
-function getAllPropertyNames(obj){
-    var props = Object.getOwnPropertyNames(obj);
-    if(obj.__proto__ != null){
-        return props.concat(getAllPropertyNames(obj.__proto__))
-    }
-    else{
-    return props;
-    }
-}
-
-function toDict(obj){
-    dict = {}
-    getAllPropertyNames(obj).filter(name => name.includes('__') == false).forEach(n => dict[n]=obj[n]);
-    return dict;
-}
-
-function eventToDict(e){
-    var res={}; 
-    res['node']=toDict(e.node); 
-    res['event']=toDict(e.event); 
-    res['at'] = e.at;
-    return res;
-}
-var head = document.getElementsByTagName('head')[0];
-var jq = document.createElement('script');
-jq.src="https://code.jquery.com/jquery-3.3.1.min.js";
-head.appendChild(jq);
-window.getAllElements = getAllElements;
-window.getAllPropertyNames = getAllPropertyNames;
-window.toDict = toDict;
-window.eventToDict = eventToDict;
-getAllElements().forEach(el=>registerListener('click',el))
-getAllElements().forEach(el=>registerListener('change',el))
-
-""")
+        dirname = os.path.dirname(__file__)
+        js = open(os.path.join(dirname, 'js/crawler.js'), 'r').read()
+        self.driver.execute_script(js)
 
     def quit(self):
         self.driver.quit()

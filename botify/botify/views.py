@@ -1,6 +1,5 @@
-from django.http import HttpResponse, HttpResponseNotFound
+
 from django.shortcuts import render
-from django.views.generic import ListView
 
 from botify.crawler import Crawler
 from .models import Session, SessionEvent

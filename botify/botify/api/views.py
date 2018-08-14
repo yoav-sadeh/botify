@@ -1,8 +1,8 @@
 from rest_framework import viewsets, authentication, permissions
 from rest_framework.views import APIView
 
-from botify.api.serializers import SessionEventSerializer
-from botify.models import SessionEvent
+from botify.api.serializers import SessionEventSerializer, DOMElementEventSerializer, SessionSerializer
+from botify.models import SessionEvent, DOMElementEvent, Session
 
 
 class SessionEventView(APIView):
@@ -14,3 +14,11 @@ class SessionEventView(APIView):
 
     def post(self, request, format=None):
         pass
+
+class DOMElementEventViewSet(viewsets.ModelViewSet):
+    queryset = DOMElementEvent.objects.all()
+    serializer_class = DOMElementEventSerializer
+
+class SessionViewSet(viewsets.ModelViewSet):
+    queryset = Session.objects.all()
+    serializer_class = SessionSerializer
