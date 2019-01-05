@@ -63,7 +63,7 @@ function getNodeUniqueId(node){
     const fieldSeparator = '|';
     fields = [];
     fields.push(node.id.length > 0? `id${keySeparator}${node.id}` : null); //TODO: Implement full recognition
-    fields.push(node.classList.join.length > 0? `id${keySeparator}${node.id}` : null);
+    fields.push(node.classList.length > 0? `id${keySeparator}${node.id}` : null);
     return fields.filter(f => f !== null).join(fieldSeparator)
 }
 
