@@ -37,7 +37,7 @@ class Crawler(object):
     def inject(self):
         try:
             dirname = os.path.dirname(__file__)
-            js = open(os.path.join(dirname, 'js/crawler.js'), 'r').read()
+            js = open(os.path.join(dirname, 'js/injector.js'), 'r').read()
             self.driver.execute_script(js)
         except Exception as e:
             print(e)
