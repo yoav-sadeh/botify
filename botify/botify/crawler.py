@@ -35,9 +35,12 @@ class Crawler(object):
         assert regex.match(url) is not None
 
     def inject(self):
-        dirname = os.path.dirname(__file__)
-        js = open(os.path.join(dirname, 'js/crawler.js'), 'r').read()
-        self.driver.execute_script(js)
+        try:
+            dirname = os.path.dirname(__file__)
+            js = open(os.path.join(dirname, 'js/crawler.js'), 'r').read()
+            self.driver.execute_script(js)
+        except Exception as e:
+            print(e)
 
     def quit(self):
         self.driver.quit()
